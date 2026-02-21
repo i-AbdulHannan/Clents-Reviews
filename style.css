@@ -1,0 +1,305 @@
+/* ========== style.css ========== */
+/* RESET + GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #000000;
+  color: #ffffff;
+  line-height: 1.5;
+  overflow-x: hidden;
+  opacity: 0; /* preloader reveals */
+  transition: opacity 0.4s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+/* ---------- PRELOADER ---------- */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.preloader-content {
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.preloader-logo {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #fff 30%, #0326fc 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px #0326fc);
+  animation: pulse-glow 1.6s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 5px #0326fc); }
+  100% { filter: drop-shadow(0 0 30px #0326fc); }
+}
+
+/* ---------- GLASS HEADER ---------- */
+.glass-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ---------- ACCENT BLUE (only hover, glow, buttons) ---------- */
+.btn-primary {
+  background: transparent;
+  border: 1.5px solid #ffffff;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px transparent;
+}
+
+.btn-primary:hover {
+  border-color: #0326fc;
+  background: #0326fc;
+  color: #000;
+  box-shadow: 0 0 25px #0326fc;
+}
+
+.btn-outline {
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  transition: 0.2s;
+}
+.btn-outline:hover {
+  border-color: #0326fc;
+  box-shadow: 0 0 18px #0326fc;
+}
+
+.accent-glow {
+  transition: all 0.2s;
+}
+.accent-glow:hover {
+  box-shadow: 0 0 20px #0326fc;
+  border-color: #0326fc;
+}
+
+/* star rating highlight (blue) */
+.star-filled {
+  color: #0326fc;
+  filter: drop-shadow(0 0 6px #0326fc);
+}
+.star-empty {
+  color: #444;
+}
+
+/* ---------- REVIEW CARDS ---------- */
+.review-card {
+  background: rgba(20,20,20,0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid #222;
+  border-radius: 32px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.review-card:hover {
+  border-color: #0326fc;
+  box-shadow: 0 0 40px rgba(3,38,252,0.3);
+  transform: translateY(-6px);
+}
+
+/* rating summary */
+.summary-card {
+  background: #0a0a0a;
+  border-radius: 2rem;
+  border-left: 4px solid #0326fc;
+  padding: 1.5rem;
+}
+
+/* admin dashboard dark premium */
+.dashboard-sidebar {
+  background: #0b0b0b;
+  border-right: 1px solid #1f1f1f;
+  min-width: 260px;
+}
+.dashboard-main {
+  background: #000;
+}
+.filter-btn.active {
+  background: #0326fc;
+  color: #000;
+  border-color: #0326fc;
+  box-shadow: 0 0 20px #0326fc;
+}
+.toggle-switch {
+  width: 44px;
+  height: 24px;
+  background: #333;
+  border-radius: 40px;
+  position: relative;
+  cursor: pointer;
+}
+.toggle-switch::after {
+  content: '';
+  width: 18px; height: 18px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px; left: 3px;
+  transition: 0.2s;
+}
+.toggle-switch.active {
+  background: #0326fc;
+  box-shadow: 0 0 15px #0326fc;
+}
+.toggle-switch.active::after {
+  left: 23px;
+}
+
+/* modal */
+.modal-overlay {
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(8px);
+}
+.modal-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 2rem;
+  max-width: 500px;
+}
+
+/* floating labels */
+.floating-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.floating-group input,
+.floating-group textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #333;
+  padding: 1.5rem 0 0.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  outline: none;
+}
+.floating-group label {
+  position: absolute;
+  top: 1.2rem;
+  left: 0;
+  color: #777;
+  transition: 0.2s ease;
+  pointer-events: none;
+}
+.floating-group input:focus ~ label,
+.floating-group input:not(:placeholder-shown) ~ label,
+.floating-group textarea:focus ~ label,
+.floating-group textarea:not(:placeholder-shown) ~ label {
+  top: 0;
+  font-size: 0.8rem;
+  color: #0326fc;
+}
+.floating-group .border-highlight {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: #0326fc;
+  transition: 0.3s;
+}
+.floating-group input:focus ~ .border-highlight,
+.floating-group textarea:focus ~ .border-highlight {
+  width: 100%;
+  box-shadow: 0 0 12px #0326fc;
+}
+
+/* cursor subtle effect */
+* {
+  cursor: none;
+}
+.custom-cursor {
+  width: 12px; height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s;
+  transform: translate(-50%, -50%);
+}
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor {
+  transform: translate(-50%, -50%) scale(1.8);
+  background: #0326fc;
+}
+
+/* mobile menu */
+.hamburger {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hamburger span {
+  width: 100%; height: 2px;
+  background: white;
+  transition: 0.3s;
+}
+.mobile-nav {
+  background: #000;
+  position: fixed;
+  top: 0; right: -100%;
+  width: 70%; height: 100vh;
+  padding: 2rem;
+  transition: right 0.4s;
+  border-left: 1px solid #0326fc;
+}
+.mobile-nav.open {
+  right: 0;
+}
+
+/* footer premium */
+.premium-footer {
+  background: #0b0b0b;
+  border-top: 1px solid #222;
+}
+
+/* rating summary average */
+.avg-rating {
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(145deg, #fff, #aaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== responsive tweaks ===== */
+@media (max-width: 768px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}
